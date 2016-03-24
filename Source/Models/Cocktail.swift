@@ -11,6 +11,7 @@ import Foundation
 struct Cocktail {
   let spirit: Spirit
   let name: String
+  let comment: String?
 }
 
 func filterCocktailsBySpirit(cocktails cocktails: [Cocktail], spirit: Spirit) -> [Cocktail] {
