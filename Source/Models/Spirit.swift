@@ -16,4 +16,7 @@ enum Spirit: String {
   case Tequila = "Tequila"
   case Whiskey = "Whiskey"
   case Vodka = "Vodka"
+
+  // Great coding practice
+  case None = "All"
 }
