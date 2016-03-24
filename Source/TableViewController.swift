@@ -20,12 +20,21 @@ class TableViewController: UITableViewController {
     super.viewDidLoad()
 
     cocktails = [
+      Cocktail(spirit: .Brandy, name: "B&B"),
+      Cocktail(spirit: .Brandy, name: "Stinger"),
+      Cocktail(spirit: .Brandy, name: "Sidecar"),
       Cocktail(spirit: .Gin, name: "Aviation"),
       Cocktail(spirit: .Gin, name: "Gimlet"),
       Cocktail(spirit: .Gin, name: "Martini"),
+      Cocktail(spirit: .Gin, name: "Daisy Mae"),
+      Cocktail(spirit: .Gin, name: "Negroni"),
+      Cocktail(spirit: .Whiskey, name: "Veaux Carré"),
+      Cocktail(spirit: .Whiskey, name: "Manhattan"),
       Cocktail(spirit: .Whiskey, name: "Whiskey sour"),
       Cocktail(spirit: .Tequila, name: "Margarita"),
-      Cocktail(spirit: .Rum, name: "Daiquiri")
+      Cocktail(spirit: .Rum, name: "Daiquiri"),
+      Cocktail(spirit: .Rum, name: "Mai Tai"),
+      Cocktail(spirit: .Rum, name: "Mojito")
     ]
 
     viewModel.dataSource = cocktails

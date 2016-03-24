@@ -27,6 +27,7 @@ extension TableViewModel: UITableViewDataSource {
     let cocktail = dataSource[indexPath.row]
 
     cell.textLabel?.text = cocktail.name
+    cell.detailTextLabel?.text = cocktail.spirit.rawValue
 
     return cell
   }
