@@ -9,15 +9,12 @@
 import Foundation
 
 struct Cocktail {
-  let spirit: String
+  let spirit: Spirit
   let name: String
 }
 
-func filterCocktailsBySpirit(cocktails cocktails: [Cocktail], spirit: String) -> [Cocktail] {
-  return cocktails.filter({ (cocktail: Cocktail) -> Bool in
-    // Check for an exact match
-    cocktail.spirit.lowercaseString == spirit.lowercaseString
-  })
+func filterCocktailsBySpirit(cocktails cocktails: [Cocktail], spirit: Spirit) -> [Cocktail] {
+  return cocktails.filter({ $0.spirit == spirit })
 }
 
 func filterCocktailsByName(cocktails cocktails: [Cocktail], name: String) -> [Cocktail] {

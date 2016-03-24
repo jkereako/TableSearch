@@ -18,14 +18,14 @@ class TableViewController: UITableViewController {
     super.viewDidLoad()
 
     cocktails = [
-      Cocktail(spirit: "Gin", name: "Aviation"),
-      Cocktail(spirit: "Gin", name: "Gimlet"),
-      Cocktail(spirit: "Gin", name: "Martini"),
-      Cocktail(spirit: "Whiskey", name: "Whiskey sour"),
-      Cocktail(spirit: "Tequila", name: "Margarita"),
-      Cocktail(spirit: "Rum", name: "Daiquiri")
+      Cocktail(spirit: .Gin, name: "Aviation"),
+      Cocktail(spirit: .Gin, name: "Gimlet"),
+      Cocktail(spirit: .Gin, name: "Martini"),
+      Cocktail(spirit: .Whiskey, name: "Whiskey sour"),
+      Cocktail(spirit: .Tequila, name: "Margarita"),
+      Cocktail(spirit: .Rum, name: "Daiquiri")
     ]
-    
+
     viewModel.dataSource = cocktails
     tableView.dataSource = viewModel
 
@@ -36,7 +36,11 @@ class TableViewController: UITableViewController {
     searchController.dimsBackgroundDuringPresentation = true
 
     // Setup the Scope Bar
-    searchController.searchBar.scopeButtonTitles = ["Brandy", "Gin", "Rum", "Tequila", "Whiskey", "Vodka"]
+    searchController.searchBar.scopeButtonTitles = [
+      Spirit.Brandy.rawValue, Spirit.Gin.rawValue, Spirit.Rum.rawValue,
+      Spirit.Tequila.rawValue, Spirit.Whiskey.rawValue, Spirit.Vodka.rawValue
+    ]
+
     tableView.tableHeaderView = searchController.searchBar
   }
 }
@@ -45,8 +49,16 @@ class TableViewController: UITableViewController {
 extension TableViewController: UISearchBarDelegate {
   func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
 
+    guard let scope = searchBar.scopeButtonTitles?[selectedScope],
+      let spirit = Spirit(rawValue: scope) else {
+
+        assertionFailure("Expected a Spirit enum")
+
+        return
+    }
+
     viewModel.dataSource = filterCocktailsBySpirit(
-      cocktails: cocktails, spirit: searchBar.scopeButtonTitles?[selectedScope] ?? ""
+      cocktails: cocktails, spirit: spirit
     )
 
     tableView.reloadData()
@@ -66,7 +78,7 @@ extension TableViewController: UISearchResultsUpdating {
     viewModel.dataSource = filterCocktailsByName(
       cocktails: cocktails, name: searchController.searchBar.text ?? ""
     )
-
+    
     tableView.reloadData()
   }
 }
