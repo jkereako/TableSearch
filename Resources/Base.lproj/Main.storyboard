@@ -8,7 +8,7 @@
         <!--Root View Controller-->
         <scene sceneID="YQQ-A9-5py">
             <objects>
-                <tableViewController id="Z1h-37-4yk" sceneMemberID="viewController">
+                <tableViewController id="Z1h-37-4yk" customClass="TableViewController" customModule="TableSearch" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="980-Le-7d7">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
