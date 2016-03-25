@@ -8,10 +8,8 @@
 
 import UIKit
 
-class TableViewController: UITableViewController {
-  let searchController = UISearchController(searchResultsController: nil)
-
-  private let viewModel = TableViewModel()
+class CocktailTableViewController: UITableViewController {
+  private let viewModel = CocktailTableViewModel()
   private var cocktails: [Cocktail] = []
   private var scope: Spirit = .None
   private var searchTerm = ""
@@ -23,24 +21,6 @@ class TableViewController: UITableViewController {
 
     viewModel.dataSource = cocktails
     tableView.dataSource = viewModel
-
-    // Setup the Search Controller
-    searchController.searchResultsUpdater = self
-    searchController.searchBar.delegate = self
-    definesPresentationContext = true
-    searchController.dimsBackgroundDuringPresentation = false
-
-    // Setup the Scope Bar
-    searchController.searchBar.scopeButtonTitles = [
-      Spirit.None.rawValue,
-      Spirit.Brandy.rawValue, Spirit.Gin.rawValue, Spirit.Rum.rawValue,
-      Spirit.Tequila.rawValue, Spirit.Whiskey.rawValue, Spirit.Vodka.rawValue
-    ]
-
-    // Initialize the scope selection to All
-    searchController.searchBar.selectedScopeButtonIndex = 0
-
-    tableView.tableHeaderView = searchController.searchBar
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -50,7 +30,7 @@ class TableViewController: UITableViewController {
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    guard let toVC = segue.destinationViewController as? ViewController
+    guard let toVC = segue.destinationViewController as? CocktailController
       where segue.identifier == "showDetail", let cell = sender as? UITableViewCell else {
         assertionFailure(
           "Expected the destination to be a `ViewController` with a particular segue identifier."
@@ -65,7 +45,32 @@ class TableViewController: UITableViewController {
   }
 }
 
-extension TableViewController: UISearchBarDelegate {
+extension CocktailTableViewController: UISearchBarDelegate {
+  func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    // Check for a search term. This method is invoked when the user taps the search bar for the
+    // first time __and__ when the user cancels the search.
+    guard let searchTerm = searchBar.text else {
+      assertionFailure("Expected a search text to have a value.")
+      return
+    }
+
+    self.searchTerm = searchTerm
+
+    var filteredCocktails = cocktails
+
+    if scope != .None {
+      filteredCocktails = filterCocktailsBySpirit(cocktails: cocktails, spirit: scope)
+    }
+
+    if searchTerm.characters.count > 0 {
+      filteredCocktails = filterCocktailsByName(cocktails: filteredCocktails, name: searchTerm)
+    }
+
+    viewModel.dataSource = filteredCocktails
+
+    tableView.reloadData()
+  }
+
   func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
 
     guard let scope = searchBar.scopeButtonTitles?[selectedScope],
@@ -93,38 +98,32 @@ extension TableViewController: UISearchBarDelegate {
     tableView.reloadData()
   }
 
+  func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+
+    NSNotificationCenter.defaultCenter().postNotificationName(
+      dismissSearchBarNotification, object: nil
+    )
+  }
+
   func searchBarCancelButtonClicked(searchBar: UISearchBar) {
     // Reset the state
     searchBar.selectedScopeButtonIndex = 0
     scope = .None
     searchTerm = ""
+
+    searchBar.resignFirstResponder()
+
+    NSNotificationCenter.defaultCenter().postNotificationName(
+      dismissSearchBarNotification, object: nil
+    )
   }
-}
 
-extension TableViewController: UISearchResultsUpdating {
-  func updateSearchResultsForSearchController(searchController: UISearchController) {
+  func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
 
-    // Check for a search term. This method is invoked when the user taps the search bar for the
-    // first time __and__ when the user cancels the search.
-    guard let searchTerm = searchController.searchBar.text else {
-      assertionFailure("Expected a search text to have a value.")
-      return
-    }
-
-    self.searchTerm = searchTerm
-
-    var filteredCocktails = cocktails
-
-    if scope != .None {
-      filteredCocktails = filterCocktailsBySpirit(cocktails: cocktails, spirit: scope)
-    }
-
-    if searchTerm.characters.count > 0 {
-      filteredCocktails = filterCocktailsByName(cocktails: filteredCocktails, name: searchTerm)
-    }
-    
-    viewModel.dataSource = filteredCocktails
-    
-    tableView.reloadData()
+    NSNotificationCenter.defaultCenter().postNotificationName(
+      dismissSearchBarNotification, object: nil
+    )
   }
 }

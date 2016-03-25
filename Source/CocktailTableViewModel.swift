@@ -8,12 +8,12 @@
 
 import UIKit
 
-class TableViewModel: NSObject {
+class CocktailTableViewModel: NSObject {
   var dataSource: [Cocktail] = []
   var selectedCocktail: Cocktail?
 }
 
-extension TableViewModel: UITableViewDataSource {
+extension CocktailTableViewModel: UITableViewDataSource {
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return 1
   }
@@ -34,7 +34,7 @@ extension TableViewModel: UITableViewDataSource {
   }
 }
 
-extension TableViewModel: UITableViewDelegate {
+extension CocktailTableViewModel: UITableViewDelegate {
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     selectedCocktail = dataSource[indexPath.row]
   }

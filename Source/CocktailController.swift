@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CocktailController: UIViewController {
   var cocktail: Cocktail!
 
   @IBOutlet weak var name: UILabel!

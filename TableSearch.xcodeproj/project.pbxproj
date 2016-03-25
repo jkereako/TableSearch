@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		36F115DF1CA4268700917EAB /* Spirit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F115DE1CA4268700917EAB /* Spirit.swift */; };
 		36F115E11CA4888600917EAB /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F115E01CA4888600917EAB /* DataSource.swift */; };
-		624A5F8E1CA3856D00D20B52 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A5F8D1CA3856D00D20B52 /* TableViewController.swift */; };
+		624A5F8E1CA3856D00D20B52 /* CocktailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A5F8D1CA3856D00D20B52 /* CocktailTableViewController.swift */; };
 		624A5F911CA385FF00D20B52 /* Cocktail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A5F901CA385FF00D20B52 /* Cocktail.swift */; };
-		624A5F931CA38A4500D20B52 /* TableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A5F921CA38A4500D20B52 /* TableViewModel.swift */; };
+		624A5F931CA38A4500D20B52 /* CocktailTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A5F921CA38A4500D20B52 /* CocktailTableViewModel.swift */; };
+		62549FC71CA5CFD700428B91 /* ContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62549FC61CA5CFD700428B91 /* ContainerController.swift */; };
 		62C047B51CA3842E0043DC1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C047B41CA3842E0043DC1A /* AppDelegate.swift */; };
-		62C047B71CA3842E0043DC1A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C047B61CA3842E0043DC1A /* ViewController.swift */; };
+		62C047B71CA3842E0043DC1A /* CocktailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C047B61CA3842E0043DC1A /* CocktailController.swift */; };
 		62C047BA1CA3842E0043DC1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62C047B81CA3842E0043DC1A /* Main.storyboard */; };
 		62C047BC1CA3842E0043DC1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62C047BB1CA3842E0043DC1A /* Assets.xcassets */; };
 		62C047BF1CA3842E0043DC1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62C047BD1CA3842E0043DC1A /* LaunchScreen.storyboard */; };
@@ -41,12 +42,13 @@
 /* Begin PBXFileReference section */
 		36F115DE1CA4268700917EAB /* Spirit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spirit.swift; sourceTree = "<group>"; };
 		36F115E01CA4888600917EAB /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
-		624A5F8D1CA3856D00D20B52 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		624A5F8D1CA3856D00D20B52 /* CocktailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocktailTableViewController.swift; sourceTree = "<group>"; };
 		624A5F901CA385FF00D20B52 /* Cocktail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cocktail.swift; sourceTree = "<group>"; };
-		624A5F921CA38A4500D20B52 /* TableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewModel.swift; sourceTree = "<group>"; };
+		624A5F921CA38A4500D20B52 /* CocktailTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocktailTableViewModel.swift; sourceTree = "<group>"; };
+		62549FC61CA5CFD700428B91 /* ContainerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerController.swift; sourceTree = "<group>"; };
 		62C047B11CA3842E0043DC1A /* TableSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62C047B41CA3842E0043DC1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		62C047B61CA3842E0043DC1A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		62C047B61CA3842E0043DC1A /* CocktailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailController.swift; sourceTree = "<group>"; };
 		62C047B91CA3842E0043DC1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		62C047BB1CA3842E0043DC1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		62C047BE1CA3842E0043DC1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -147,9 +149,10 @@
 			children = (
 				624A5F8F1CA3859500D20B52 /* Models */,
 				62C047B41CA3842E0043DC1A /* AppDelegate.swift */,
-				624A5F8D1CA3856D00D20B52 /* TableViewController.swift */,
-				624A5F921CA38A4500D20B52 /* TableViewModel.swift */,
-				62C047B61CA3842E0043DC1A /* ViewController.swift */,
+				62549FC61CA5CFD700428B91 /* ContainerController.swift */,
+				624A5F8D1CA3856D00D20B52 /* CocktailTableViewController.swift */,
+				624A5F921CA38A4500D20B52 /* CocktailTableViewModel.swift */,
+				62C047B61CA3842E0043DC1A /* CocktailController.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -304,9 +307,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				36F115E11CA4888600917EAB /* DataSource.swift in Sources */,
-				62C047B71CA3842E0043DC1A /* ViewController.swift in Sources */,
-				624A5F931CA38A4500D20B52 /* TableViewModel.swift in Sources */,
-				624A5F8E1CA3856D00D20B52 /* TableViewController.swift in Sources */,
+				62C047B71CA3842E0043DC1A /* CocktailController.swift in Sources */,
+				624A5F931CA38A4500D20B52 /* CocktailTableViewModel.swift in Sources */,
+				62549FC71CA5CFD700428B91 /* ContainerController.swift in Sources */,
+				624A5F8E1CA3856D00D20B52 /* CocktailTableViewController.swift in Sources */,
 				62C047B51CA3842E0043DC1A /* AppDelegate.swift in Sources */,
 				36F115DF1CA4268700917EAB /* Spirit.swift in Sources */,
 				624A5F911CA385FF00D20B52 /* Cocktail.swift in Sources */,
