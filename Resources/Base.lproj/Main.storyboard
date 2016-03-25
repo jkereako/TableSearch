@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Table View Controller-->
@@ -38,7 +39,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Mb9-I3-Y0g" kind="show" id="euN-UB-hwt"/>
+                                    <segue destination="Mb9-I3-Y0g" kind="show" identifier="showDetail" id="euN-UB-hwt"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -56,7 +57,7 @@
         <!--View Controller-->
         <scene sceneID="10s-mP-gO8">
             <objects>
-                <viewController id="Mb9-I3-Y0g" sceneMemberID="viewController">
+                <viewController id="Mb9-I3-Y0g" customClass="ViewController" customModule="TableSearch" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="R9U-0i-EwV"/>
                         <viewControllerLayoutGuide type="bottom" id="mXg-O0-SOu"/>
@@ -64,12 +65,41 @@
                     <view key="view" contentMode="scaleToFill" id="kaR-pH-r8W">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WVV-Ti-sfJ" userLabel="Layout">
+                                <rect key="frame" x="20" y="64" width="560" height="536"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manhattan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPh-kV-RT4" userLabel="Name">
+                                        <rect key="frame" x="229.5" y="0.0" width="101" height="297"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A classic cocktail" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSP-bI-omY" userLabel="Comment">
+                                        <rect key="frame" x="214.5" y="297" width="131" height="239"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WVV-Ti-sfJ" firstAttribute="top" secondItem="R9U-0i-EwV" secondAttribute="bottom" id="QGe-c5-dmu"/>
+                            <constraint firstItem="mXg-O0-SOu" firstAttribute="top" secondItem="WVV-Ti-sfJ" secondAttribute="bottom" id="fdU-jg-Q0R"/>
+                            <constraint firstItem="WVV-Ti-sfJ" firstAttribute="leading" secondItem="kaR-pH-r8W" secondAttribute="leadingMargin" id="rXw-Il-dU4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WVV-Ti-sfJ" secondAttribute="trailing" id="sdg-q4-qQM"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="comment" destination="JSP-bI-omY" id="o4C-Ph-rn2"/>
+                        <outlet property="name" destination="ZPh-kV-RT4" id="vvV-Db-vUf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tlH-vc-F6R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1543" y="296"/>
+            <point key="canvasLocation" x="1620" y="316"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yGX-dB-LAy">

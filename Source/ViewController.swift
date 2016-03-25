@@ -9,17 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController {
+  var cocktail: Cocktail!
+
+  @IBOutlet weak var name: UILabel!
+  @IBOutlet weak var comment: UILabel!
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+
+    name.text = cocktail.name
+    comment.text = cocktail.comment ?? ""
   }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-
-
 }
 

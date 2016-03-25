@@ -10,6 +10,7 @@ import UIKit
 
 class TableViewModel: NSObject {
   var dataSource: [Cocktail] = []
+  var selectedCocktail: Cocktail?
 }
 
 extension TableViewModel: UITableViewDataSource {
@@ -30,5 +31,11 @@ extension TableViewModel: UITableViewDataSource {
     cell.detailTextLabel?.text = cocktail.spirit.rawValue
 
     return cell
+  }
+}
+
+extension TableViewModel: UITableViewDelegate {
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    selectedCocktail = dataSource[indexPath.row]
   }
 }

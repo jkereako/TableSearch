@@ -48,6 +48,21 @@ class TableViewController: UITableViewController {
 
     super.viewWillAppear(animated)
   }
+
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    guard let toVC = segue.destinationViewController as? ViewController
+      where segue.identifier == "showDetail", let cell = sender as? UITableViewCell else {
+        assertionFailure(
+          "Expected the destination to be a `ViewController` with a particular segue identifier."
+        )
+        return
+    }
+
+    let indexPath = tableView.indexPathForCell(cell)!
+    let selected = viewModel.dataSource[indexPath.row]
+
+    toVC.cocktail = selected
+  }
 }
 
 extension TableViewController: UISearchBarDelegate {
@@ -107,7 +122,7 @@ extension TableViewController: UISearchResultsUpdating {
     if searchTerm.characters.count > 0 {
       filteredCocktails = filterCocktailsByName(cocktails: filteredCocktails, name: searchTerm)
     }
-
+    
     viewModel.dataSource = filteredCocktails
     
     tableView.reloadData()
