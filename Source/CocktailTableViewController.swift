@@ -17,6 +17,8 @@ class CocktailTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    definesPresentationContext = true
+
     cocktails = DataSource.cocktails
 
     viewModel.dataSource = cocktails
@@ -101,6 +103,7 @@ extension CocktailTableViewController: UISearchBarDelegate {
   func searchBarSearchButtonClicked(searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
 
+    // Dismiss the search bar from the parent view
     NSNotificationCenter.defaultCenter().postNotificationName(
       dismissSearchBarNotification, object: nil
     )
@@ -108,22 +111,28 @@ extension CocktailTableViewController: UISearchBarDelegate {
 
   func searchBarCancelButtonClicked(searchBar: UISearchBar) {
     // Reset the state
+    searchBar.text = ""
     searchBar.selectedScopeButtonIndex = 0
     scope = .None
     searchTerm = ""
+    viewModel.dataSource = cocktails
 
     searchBar.resignFirstResponder()
 
+    // Dismiss the search bar from the parent view. Why are we making the call here instead of
+    // inside `searchBarTextDidEndEditing`? Because `searchBarTextDidEndEditing` is invoked when
+    // the table view transitions to the detail view which then dismisses the search bar. We don't
+    // want that.
     NSNotificationCenter.defaultCenter().postNotificationName(
       dismissSearchBarNotification, object: nil
     )
   }
 
-  func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-    searchBar.resignFirstResponder()
+  func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool {
+    return true
+  }
 
-    NSNotificationCenter.defaultCenter().postNotificationName(
-      dismissSearchBarNotification, object: nil
-    )
+  func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    tableView.reloadData()
   }
 }

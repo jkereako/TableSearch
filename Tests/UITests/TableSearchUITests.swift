@@ -9,28 +9,33 @@
 import XCTest
 
 class TableSearchUITests: XCTestCase {
-        
-    override func setUp() {
-        super.setUp()
-        
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
 
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
+  override func setUp() {
+    super.setUp()
+
+    continueAfterFailure = false
+    XCUIApplication().launch()
+  }
+
+  override func tearDown() {
+    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    super.tearDown()
+  }
+
+  func testExample() {
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+    let app = XCUIApplication()
+    app.navigationBars["TableSearch.Container"].buttons["Search"].tap()
+    app.buttons["Cancel"].tap()
+    app.tables.containingType(.Cell, identifier:"cell").element.tap()
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
+    let element = app.otherElements.containingType(.NavigationBar, identifier:"TableSearch.Container").childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1)
+    element.childrenMatchingType(.Image).element.tap()
+    app.buttons["Brandy"].tap()
+    element.childrenMatchingType(.SearchField).element.tap()
+
+    // Use recording to get started writing UI tests.
+    // Use XCTAssert and related functions to verify your tests produce the correct results.
+  }
+
 }

@@ -15,12 +15,12 @@ class ContainerController: UIViewController {
   @IBOutlet weak var searchBarTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var containerTopConstraint: NSLayoutConstraint!
 
-  let searchController = UISearchController(searchResultsController: nil)
+  private var constraintConstants = (searchBar: CGFloat(-88.0), container: CGFloat(-44.0))
+//  private let containerTopConstants = (-44.0, 44.0)
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    definesPresentationContext = true
     NSNotificationCenter.defaultCenter().addObserver(
       self, selector: #selector(dismissSearchBar), name: dismissSearchBarNotification, object: nil
     )
@@ -32,38 +32,63 @@ class ContainerController: UIViewController {
         assertionFailure("Expected a `CocktailTableViewController`.")
         return
     }
-    
+
     searchBar.delegate = toVC
+  }
+
+  override func updateViewConstraints() {
+    searchBarTopConstraint.constant = constraintConstants.searchBar
+    containerTopConstraint.constant = constraintConstants.container
+
+    super.updateViewConstraints()
   }
 }
 
 extension ContainerController {
-  func dismissSearchBar() {
-    toggleSearchBar()
-  }
-  
-  func toggleSearchBar() {
-    searchBar.hidden = false
-    // see: http://stackoverflow.com/questions/12622424/how-do-i-animate-constraint-changes#12664093
+  func displaySearchBar() {
+
+    constraintConstants.searchBar = 0
+    constraintConstants.container = 44.0
 
     view.layoutIfNeeded()
+    view.setNeedsUpdateConstraints()
+    view.updateConstraintsIfNeeded()
 
     UIView.animateWithDuration(
       0.25,
       animations: { [unowned self] in
-        if self.searchBarTopConstraint.constant == 0 {
-          self.searchBarTopConstraint.constant = -88.0
-          self.containerTopConstraint.constant = -44.0
-        }
-
-        else {
-          self.searchBarTopConstraint.constant = 0
-          self.containerTopConstraint.constant = 44.0
-        }
-
         self.view.layoutIfNeeded()
       }
     )
+  }
+
+  func dismissSearchBar() {
+
+    constraintConstants.searchBar = -88.0
+    constraintConstants.container = -44.0
+
+    // Ensures that all pending layout operations have been completed
+    view.layoutIfNeeded()
+    view.setNeedsUpdateConstraints()
+    view.updateConstraintsIfNeeded()
+
+    UIView.animateWithDuration(
+      0.25,
+      animations: { [unowned self] in
+
+        self.view.endEditing(false)
+        self.view.layoutIfNeeded()
+      }
+    )
+  }
+
+  func toggleSearchBar() {
+    if self.searchBarTopConstraint.constant == 0 {
+      dismissSearchBar()
+    }
+    else {
+      displaySearchBar()
+    }
   }
 
   @IBAction func searchButtonAction(sender: UIBarButtonItem) {
