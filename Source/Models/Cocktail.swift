@@ -15,12 +15,12 @@ struct Cocktail {
 }
 
 func filterCocktailsBySpirit(cocktails cocktails: [Cocktail], spirit: Spirit) -> [Cocktail] {
-  return cocktails.filter({ $0.spirit == spirit })
+  return cocktails.filter { $0.spirit == spirit }
 }
 
 func filterCocktailsByName(cocktails cocktails: [Cocktail], name: String) -> [Cocktail] {
-  return cocktails.filter({ (cocktail: Cocktail) -> Bool in
+  return cocktails.filter { cocktail -> Bool in
     // Check for a substring
     cocktail.name.lowercaseString.containsString(name.lowercaseString)
-  })
+  }
 }
