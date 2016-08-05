@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CocktailTableViewModel: NSObject {
+final class CocktailTableViewModel: NSObject {
   var dataSource: [Cocktail] = []
   var selectedCocktail: Cocktail?
 }

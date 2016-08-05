@@ -10,7 +10,7 @@ import UIKit
 
 let dismissSearchBarNotification = NSBundle.mainBundle().bundleIdentifier! + ".dismissSearchBar"
 
-class ContainerController: UIViewController {
+final class ContainerController: UIViewController {
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var searchBarTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var containerTopConstraint: NSLayoutConstraint!

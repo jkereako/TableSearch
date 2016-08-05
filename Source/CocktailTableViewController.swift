@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CocktailTableViewController: UITableViewController {
+final class CocktailTableViewController: UITableViewController {
   private let viewModel = CocktailTableViewModel()
   private var cocktails: [Cocktail] = []
   private var scope: Spirit = .None
